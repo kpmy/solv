@@ -1,0 +1,36 @@
+<md-toolbar layout="row" layout-align="start center">
+    <md-button class="md-icon-button" aria-label="navi" ng-click="toggleNav('left-nav')">
+        <md-icon md-svg-icon="action:ic_fingerprint_24px"></md-icon>
+    </md-button>
+    <div><h3>НАУКА ЛОГИКИ В КАРТИНКАХ</h3></div>
+    <span flex></span>
+    <md-button aria-label="Back" ng-click="showPrevStep()" ng-if="hasPrevStep()">
+        <span ng-if="!hasNextStep()">НАЗАД</span>
+        <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+    </md-button>
+    <md-button aria-label="Fwd" ng-click="showNextStep()" ng-if="hasNextStep()">
+        ДАЛЬШЕ
+        <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
+    </md-button>
+</md-toolbar>
+<div layout="row" layout-align="end center">
+    <md-subheader><em>{{phrase()}}</em></md-subheader>
+</div>
+<md-sidenav class="md-sidenav-left" md-component-id="left-nav">
+    <md-toolbar layout="row" layout-align="start center">
+        <md-button class="md-icon-button" aria-label="navi" ng-click="toggleNav('left-nav')">
+            <md-icon md-svg-icon="hardware:ic_keyboard_arrow_left_24px"></md-icon>
+        </md-button>
+        <div><h3>КАТЕГОРИИ</h3></div>
+    </md-toolbar>
+    <md-content>
+        <md-list>
+            <md-list-item ng-repeat="(i, step) in steps" ng-click="showStep(i) + toggleNav('left-nav')">
+                <div layout="row" class="md-list-item-text">
+                    <md-icon md-svg-icon="action:ic_timeline_24px" style="padding-right: 0.3em"></md-icon>
+                    <p>{{step.name}}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-sidenav>

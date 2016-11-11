@@ -1,0 +1,46 @@
+<style>
+    .d3-pane {
+        min-width: 600px;
+        width: 600px;
+        max-width: 600px;
+    }
+    .left-side {
+        padding-left: 1em;
+    }
+    .left-side-card-text{
+        text-align: left;
+    }
+    .right-side-card-text{
+        text-align: right;
+    }
+    .left-side-card{
+        padding-right: 2em;
+    }
+    .right-side-card{
+        padding-left: 2em;
+    }
+</style>
+<div layout="column">
+    <navbar></navbar>
+    <md-content layout="row" layout-align="space-around start">
+        <div flex="30" layout="column" class="left-side">
+            <div ng-class="$odd ? 'right-side-card' : 'left-side-card'" ng-repeat="fact in step.facts">
+                <md-card>
+                    <md-card-header>
+                        <md-card-header-text ng-class="$odd ? 'right-side-card-text' : 'left-side-card-text'">
+                            <span class="md-headline">{{fact.title}}</span>
+                            <span class="md-subhead" ng-bind-html="fact.description"></span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-actions layout="row" layout-align="end center" ng-if="!_.isEmpty(fact.actions)">
+                        <md-button ng-repeat="action in fact.actions" ng-click="showStep(action.value)">{{action.name}}</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+        <div class="d3-pane" flex="50">
+            <d3-cloud words="words" padding="1" slope-factor="40" slope-base="1" rotate="rotate(word)" events="events"></d3-cloud>
+        </div>
+        <div flex="20"></div>
+    </md-content>
+</div>

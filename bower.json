@@ -1,0 +1,30 @@
+{
+  "name": "solv",
+  "authors": [
+    "κρμγ <petryxa.clever@gmail.com>"
+  ],
+  "description": "",
+  "main": "components/app.js",
+  "license": "WTFPL",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-ui-router": "0.3.1",
+    "angular-material": "^1.1.1",
+    "angular-material-icons": "^0.7.1",
+    "angular-messages": "^1.5.8",
+    "material-design-icons": "^3.0.1",
+    "underscore": "^1.8.3",
+    "roboto-fontface": "^0.6.0",
+    "d3-cloud-ng": "^0.9.6",
+    "angular-sanitize": "^1.5.8"
+  }
+}
