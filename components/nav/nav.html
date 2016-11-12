@@ -1,12 +1,18 @@
+<style>
+    .header {
+        cursor: pointer;
+    }
+</style>
 <md-toolbar layout="row" layout-align="start center">
     <md-button class="md-icon-button" aria-label="navi" ng-click="toggleNav('left-nav')">
         <md-icon md-svg-icon="action:ic_fingerprint_24px"></md-icon>
     </md-button>
-    <div><h3>НАУКА ЛОГИКИ В КАРТИНКАХ</h3></div>
-    <span flex></span>
+    <div flex="45"><h3 ng-click="showStep(0)" class="header">НАУКА ЛОГИКИ В КАРТИНКАХ</h3></div>
+    <div flex="20"><h3>{{step.name.toUpperCase()}}</h3></div>
+    <div flex></div>
     <md-button aria-label="Back" ng-click="showPrevStep()" ng-if="hasPrevStep()">
-        <span ng-if="!hasNextStep()">НАЗАД</span>
         <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+        <span ng-if="!hasNextStep()">НАЗАД</span>
     </md-button>
     <md-button aria-label="Fwd" ng-click="showNextStep()" ng-if="hasNextStep()">
         ДАЛЬШЕ

@@ -1,30 +1,5 @@
 angular.module('SolvIn')
-    .value('PureBeing', {
-        name: 'Чистое бытие',
-        words: ['есть', 'чистое', 'бытие'],
-        facts: [{
-            title: 'Есть', description: `Про всё можно сказать, что оно есть, хотя бы в виде слова.`
-        }, {
-            title: 'Бытие', description: `Всё, что есть - есть бытие.`
-        }, {
-            title: 'Чистое бытие', description: `Самое простое бытие, то есть бытие без всякой дальнейшей определённости, абстракция.`
-        }, {
-            title: 'Оно есть', description: `Кроме того, что <em>чистое&nbsp;бытие</em> есть, <em>ничего</em> о
-нём сказать нельзя.`
-        }, {
-            title: `Слово о ничто`, description: `Если о чистом бытии более нельзя сказать ничего, то как это <em>ничего</em> назвать?`,
-            actions: [{name: 'Ничто', value: `PureNothing`}]
-        }]
-    })
-    .value('PureNothing', {
-        name: 'Чистое ничто',
-        words: ['чистое', 'ничто'],
-        facts: [{title: 'Чистое ничто', description: 'Ничто чистого бытия, абстракции, есть абстрактное, <em>чистое&nbsp;ничто</em>.'},
-            {title: 'Переход', description: `Обсуждая понятие <em>чистое&nbsp;бытие</em> диалектически перешли к понятию <em>чистое&nbsp;ничто</em>.`},
-            {title: 'Чистое бытие переходит в чистое ничто.'}
-        ]
-    })
-    .controller('WizardController', function ($scope, $state, $stateParams, $mdToast, PureBeing, PureNothing) {
+    .controller('WizardController', function ($scope, $state, $stateParams, $mdToast, PureBeing, PureNothing, Becoming, Passing, Uprising) {
         $scope.steps = [];
         $scope.stepsMap = {};
 
@@ -34,9 +9,12 @@ angular.module('SolvIn')
         }
         pushStep('PureBeing', PureBeing);
         pushStep('PureNothing', PureNothing);
+        pushStep('Becoming', Becoming);
+        pushStep('Passing', Passing);
+        pushStep('Uprising', Uprising);
 
         $scope.rotate = function (w) {
-            return [0, 90, -90][Math.round(2 * Math.random())];
+            return [0, 0, 0, 90, -90][Math.round(4 * Math.random())];
         };
 
         $scope.events = {
@@ -47,7 +25,7 @@ angular.module('SolvIn')
 
         let update = $scope.update = function () {
             $scope.words = [];
-            const maxWords = 300;
+            const maxWords = 200;
             let step = $scope.step = $scope.steps[$scope.stepIdx];
 
             for(var i = 0; i<maxWords; i++){
@@ -66,7 +44,7 @@ angular.module('SolvIn')
                $scope.stepIdx = $scope.stepsMap[idx];
            }
 
-            $state.go('wizard', {id: _.invert($scope.stepsMap)[$scope.stepIdx]});
+            $state.go('wizard', {id: _.invert($scope.stepsMap)[$scope.stepIdx]}, {reload: true});
         };
 
         $scope.showNextStep = function () {
@@ -85,6 +63,11 @@ angular.module('SolvIn')
             return ($scope.stepIdx - 1) >= 0;
         };
 
-        $scope.showStep(_.isUndefined($stateParams.id) ? 'PureBeing' : $scope.stepsMap[$stateParams.id]);
-        update();
+        if (_.isUndefined($stateParams.id)) {
+            $scope.showStep('PureBeing');
+        } else {
+            $scope.stepIdx = $scope.stepsMap[$stateParams.id];
+            update();
+        }
+
     });

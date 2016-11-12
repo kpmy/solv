@@ -1,8 +1,8 @@
 <style>
     .d3-pane {
-        min-width: 600px;
-        width: 600px;
-        max-width: 600px;
+        min-width: 600px
+        width: 600px !important;
+        max-width: 600px !important;
     }
     .left-side {
         padding-left: 1em;
@@ -23,7 +23,7 @@
 <div layout="column">
     <navbar></navbar>
     <md-content layout="row" layout-align="space-around start">
-        <div flex="30" layout="column" class="left-side">
+        <div flex="40" layout="column" class="left-side">
             <div ng-class="$odd ? 'right-side-card' : 'left-side-card'" ng-repeat="fact in step.facts">
                 <md-card>
                     <md-card-header>
@@ -41,6 +41,6 @@
         <div class="d3-pane" flex="50">
             <d3-cloud words="words" padding="1" slope-factor="40" slope-base="1" rotate="rotate(word)" events="events"></d3-cloud>
         </div>
-        <div flex="20"></div>
+        <div flex="10"></div>
     </md-content>
 </div>
