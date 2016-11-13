@@ -17,12 +17,6 @@ angular.module('SolvIn')
             return [0, 0, 0, 90, -90][Math.round(4 * Math.random())];
         };
 
-        $scope.events = {
-           click: function (tag) {
-                $mdToast.showSimple('КЛИК')
-           }
-        };
-
         let update = $scope.update = function () {
             $scope.words = [];
             const maxWords = 200;
@@ -34,6 +28,12 @@ angular.module('SolvIn')
                     score: i < (2 * maxWords / 3) ? Math.random() / 2 : Math.random(),
                     index: i
                 })
+            }
+        };
+        
+        $scope.events = {
+            click: function (tag) {
+                $mdToast.showSimple('КЛИК')
             }
         };
 
