@@ -28,4 +28,15 @@ angular.module('SolvIn')
                 }
             }
         }
+    })
+    .directive('fabbar', function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'components/nav/fab.html',
+            controller: function ($scope) {
+                $scope.fab = {
+                    open: false
+                }
+            }
+        }
     });
