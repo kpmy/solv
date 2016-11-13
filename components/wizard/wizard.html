@@ -28,7 +28,7 @@
                 <md-card>
                     <md-card-header>
                         <md-card-header-text ng-class="$odd ? 'right-side-card-text' : 'left-side-card-text'">
-                            <span class="md-headline">{{fact.title}}</span>
+                            <span class="md-headline" ng-bind-html="fact.title"></span>
                             <span class="md-subhead" ng-bind-html="fact.description"></span>
                         </md-card-header-text>
                     </md-card-header>

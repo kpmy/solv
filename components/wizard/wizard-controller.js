@@ -1,17 +1,23 @@
 angular.module('SolvIn')
-    .controller('WizardController', function ($scope, $state, $stateParams, $mdToast, PureBeing, PureNothing, Becoming, Passing, Uprising) {
+    .controller('WizardController', function ($scope, $state, $stateParams, $mdToast, PureBeing, PureNothing, Becoming, Passing, Uprising, ExtantBeing, Nihility, Quality, Something, FluentSomething, Definition, Limit, Quantity, Progress) {
         $scope.steps = [];
         $scope.stepsMap = {};
 
-        function pushStep(id, step) {
-            $scope.steps.push(step);
-            $scope.stepsMap[id] = $scope.steps.length -1;
+        var injected = arguments;
+
+        function pushSteps(...ids) {
+            Array.from(ids).forEach(function (id) {
+                var step = Array.from(injected).find(s => _.isEqual(s.id, id) && _.isArray(s.words));
+                if (_.isObject(step)) {
+                    $scope.steps.push(step);
+                    $scope.stepsMap[id] = $scope.steps.length - 1;
+                } else {
+                    console.log(`no step for ${id}`);
+                }
+            });
         }
-        pushStep('PureBeing', PureBeing);
-        pushStep('PureNothing', PureNothing);
-        pushStep('Becoming', Becoming);
-        pushStep('Passing', Passing);
-        pushStep('Uprising', Uprising);
+
+        pushSteps('PureBeing', 'PureNothing', 'Becoming', 'Passing', 'Uprising', 'ExtantBeing', 'Nihility', 'Quality', 'Something', 'FluentSomething', 'Definition', 'Limit', 'Quantity', 'Progress');
 
         $scope.rotate = function (w) {
             return [0, 0, 0, 90, -90][Math.round(4 * Math.random())];
