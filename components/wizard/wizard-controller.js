@@ -26,7 +26,7 @@ angular.module('SolvIn')
         let update = $scope.update = function () {
             $scope.words = [];
             const maxWords = 200;
-            let step = $scope.step = $scope.steps[$scope.stepIdx];
+            let step = $scope.step = $scope.navi.step = $scope.steps[$scope.stepIdx];
 
             for(var i = 0; i<maxWords; i++){
                 $scope.words.push({
@@ -43,34 +43,39 @@ angular.module('SolvIn')
             }
         };
 
-        $scope.showStep = function (idx){
-           if(_.isNumber(idx)) {
-               $scope.stepIdx = idx;
-           } else {
-               $scope.stepIdx = $scope.stepsMap[idx];
-           }
+        $scope.navi = {
+            steps: $scope.steps,
+            showStep: function (idx) {
+                if (_.isNumber(idx)) {
+                    $scope.stepIdx = idx;
+                } else {
+                    $scope.stepIdx = $scope.stepsMap[idx];
+                }
 
-            $state.go('wizard', {id: _.invert($scope.stepsMap)[$scope.stepIdx]}, {reload: true});
-        };
-
-        $scope.showNextStep = function () {
-            $scope.showStep($scope.stepIdx + 1);
-        };
-
-        $scope.showPrevStep = function () {
-            $scope.showStep($scope.stepIdx - 1);
-        };
-
-        $scope.hasNextStep = function () {
-            return ($scope.stepIdx + 1) < $scope.steps.length;
-        };
-
-        $scope.hasPrevStep = function () {
-            return ($scope.stepIdx - 1) >= 0;
+                $state.go('wizard', {id: _.invert($scope.stepsMap)[$scope.stepIdx]}, {reload: true});
+            },
+            showNextStep: function () {
+                $scope.navi.showStep($scope.stepIdx + 1);
+            },
+            showPrevStep: function () {
+                $scope.navi.showStep($scope.stepIdx - 1);
+            },
+            hasNextStep: function () {
+                return ($scope.stepIdx + 1) < $scope.steps.length;
+            },
+            hasPrevStep: function () {
+                return ($scope.stepIdx - 1) >= 0;
+            },
+            stepIdx: function () {
+                return $scope.stepIdx;
+            },
+            totalSteps: function () {
+                return $scope.steps.length;
+            }
         };
 
         if (_.isUndefined($stateParams.id)) {
-            $scope.showStep('PureBeing');
+            $scope.navi.showStep('PureBeing');
         } else {
             $scope.stepIdx = $scope.stepsMap[$stateParams.id];
             update();

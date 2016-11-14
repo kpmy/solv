@@ -7,18 +7,22 @@
     <md-button class="md-icon-button" aria-label="navi" ng-click="toggleNav('left-nav')">
         <md-icon md-svg-icon="action:ic_fingerprint_24px"></md-icon>
     </md-button>
-    <div flex="45"><h3 ng-click="showStep(0)" class="header">НАУКА ЛОГИКИ В КАРТИНКАХ</h3></div>
-    <div flex="20"><h3>{{step.name.toUpperCase()}}</h3></div>
+    <div flex="45"><h3 ng-click="navi.showStep(0)" class="header">НАУКА ЛОГИКИ В КАРТИНКАХ</h3></div>
+    <div flex="20"><h3>{{navi.step.name.toUpperCase()}}</h3></div>
     <div flex></div>
-    <md-button aria-label="Back" ng-click="showPrevStep()" ng-if="hasPrevStep()">
+    <md-button aria-label="Back" ng-click="navi.showPrevStep()" ng-if="navi.hasPrevStep()">
         <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
         <span ng-if="!hasNextStep()">НАЗАД</span>
+        <md-tooltip>{{navi.steps[navi.stepIdx() - 1].name}}</md-tooltip>
     </md-button>
-    <md-button aria-label="Fwd" ng-click="showNextStep()" ng-if="hasNextStep()">
+    <md-button aria-label="Fwd" ng-click="navi.showNextStep()" ng-if="navi.hasNextStep()">
         ДАЛЬШЕ
         <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
+        <md-tooltip>{{navi.steps[navi.stepIdx() + 1].name}}</md-tooltip>
     </md-button>
 </md-toolbar>
+<md-progress-linear md-mode="determinate"
+                    ng-value="100 * ((navi.stepIdx()+1) / navi.totalSteps())"></md-progress-linear>
 <div layout="row" layout-align="end center">
     <md-subheader><em>{{phrase()}}</em></md-subheader>
 </div>
@@ -31,7 +35,7 @@
     </md-toolbar>
     <md-content>
         <md-list>
-            <md-list-item ng-repeat="(i, step) in steps" ng-click="showStep(i) + toggleNav('left-nav')">
+            <md-list-item ng-repeat="(i, step) in navi.steps" ng-click="navi.showStep(i) + toggleNav('left-nav')">
                 <div layout="row" class="md-list-item-text">
                     <md-icon md-svg-icon="action:ic_timeline_24px" style="padding-right: 0.3em"></md-icon>
                     <p>{{step.name}}</p>
