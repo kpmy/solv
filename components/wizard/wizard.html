@@ -33,7 +33,9 @@
                         </md-card-header-text>
                     </md-card-header>
                     <md-card-actions layout="row" layout-align="end center" ng-if="!_.isEmpty(fact.actions)">
-                        <md-button ng-repeat="action in fact.actions" ng-click="showStep(action.value)">{{action.name}}</md-button>
+                        <md-button ng-repeat="action in fact.actions" ng-click="navi.showStep(action.value)"
+                                   class="md-raised">{{action.name}}
+                        </md-button>
                     </md-card-actions>
                 </md-card>
             </div>
