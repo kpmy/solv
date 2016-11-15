@@ -6,15 +6,16 @@
 <md-fab-toolbar md-open="fab.open" md-direction="left" class="md-fab-bottom-right">
     <md-fab-trigger class="align-with-text">
         <md-button aria-label="menu" class="md-fab md-primary">
-            <md-icon md-svg-src="action:ic_copyright_24px"></md-icon>
+            <md-icon md-svg-src="toggle:ic_star_border_24px"></md-icon>
         </md-button>
     </md-fab-trigger>
 
     <md-toolbar layout="row" layout-align="center center">
-        <md-fab-actions>
-            <span class="copyright">kpmy © 2016. Использованы материалы М.В. Попова.</span>
+        <md-fab-actions class="md-toolbar-tools">
+            <span class="copyright">kpmy © 2016. Использованы материалы М.В. Попова и С.Н. Труфанова</span>
+            <md-button class="md-raised" ng-click="gotoIntro()">НАЧАЛО</md-button>
         </md-fab-actions>
-        <!-- class="md-toolbar-tools">
+        <!-- >
         <md-button aria-label="comment" class="md-icon-button">
             <md-icon md-svg-src="img/icons/ic_comment_24px.svg"></md-icon>
         </md-button>

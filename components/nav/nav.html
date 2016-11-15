@@ -4,10 +4,12 @@
     }
 </style>
 <md-toolbar layout="row" layout-align="start center">
-    <md-button class="md-icon-button" aria-label="navi" ng-click="toggleNav('left-nav')">
+    <md-button class="md-icon-button" aria-label="navi"
+               ng-click="_.isObject(navi) ? toggleNav('left-nav') : gotoWizard()">
         <md-icon md-svg-icon="action:ic_fingerprint_24px"></md-icon>
     </md-button>
-    <div flex="45"><h3 ng-click="navi.showStep(0)" class="header">НАУКА ЛОГИКИ В КАРТИНКАХ</h3></div>
+    <div flex="45"><h3 ng-click="_.isObject(navi) ? navi.showStep(0) : gotoWizard()" class="header">НАУКА ЛОГИКИ В
+        КАРТИНКАХ</h3></div>
     <div flex="20"><h3>{{navi.step.name.toUpperCase()}}</h3></div>
     <div flex></div>
     <md-button aria-label="Back" ng-click="navi.showPrevStep()" ng-if="navi.hasPrevStep()">
@@ -21,12 +23,12 @@
         <md-tooltip>{{navi.steps[navi.stepIdx() + 1].name}}</md-tooltip>
     </md-button>
 </md-toolbar>
-<md-progress-linear md-mode="determinate"
+<md-progress-linear ng-if="_.isObject(navi)" md-mode="determinate"
                     ng-value="100 * ((navi.stepIdx()+1) / navi.totalSteps())"></md-progress-linear>
 <div layout="row" layout-align="end center">
     <md-subheader><em>{{phrase()}}</em></md-subheader>
 </div>
-<md-sidenav class="md-sidenav-left" md-component-id="left-nav">
+<md-sidenav class="md-sidenav-left" md-component-id="left-nav" ng-if="_.isObject(navi)">
     <md-toolbar layout="row" layout-align="start center">
         <md-button class="md-icon-button" aria-label="navi" ng-click="toggleNav('left-nav')">
             <md-icon md-svg-icon="hardware:ic_keyboard_arrow_left_24px"></md-icon>
@@ -35,12 +37,24 @@
     </md-toolbar>
     <md-content>
         <md-list>
-            <md-list-item ng-repeat="(i, step) in navi.steps" ng-click="navi.showStep(i) + toggleNav('left-nav')">
-                <div layout="row" class="md-list-item-text">
-                    <md-icon md-svg-icon="action:ic_timeline_24px" style="padding-right: 0.3em"></md-icon>
-                    <p>{{step.name}}</p>
-                </div>
-            </md-list-item>
+            <section ng-repeat="(i, step) in navi.steps">
+                <md-list-item ng-click="navi.showStep(i) + toggleNav('left-nav')">
+                    <div layout="row" class="md-list-item-text">
+                        <md-icon md-svg-icon="action:ic_timeline_24px" style="padding-right: 0.3em"></md-icon>
+                        <md-icon class="md-secondary" md-svg-icon="image:ic_remove_red_eye_24px"
+                                 style="padding-right: 0.3em" ng-if="_.isEqual(navi.stepIdx(), i)"></md-icon>
+                        <p>{{step.name}}</p>
+                    </div>
+                </md-list-item>
+                <md-list-item ng-repeat="sub in step.subs" ng-if="!_.isEmpty(step.subs)"
+                              ng-click="navi.showStep(i) + toggleNav('left-nav')">
+                    <div layout="row" class="md-list-item-text" style="margin-left: 1em;">
+                        <md-icon md-svg-icon="editor:ic_show_chart_24px" style="padding-right: 0.3em"></md-icon>
+                        <p>{{sub}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+            </section>
         </md-list>
     </md-content>
 </md-sidenav>

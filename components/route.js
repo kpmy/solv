@@ -11,10 +11,16 @@ angular.module('SolvIn')
                 templateUrl: 'components/wizard/wizard.html'
             })
             .state({
+                name: 'intro',
+                url: '/',
+                controller: 'IndexController',
+                templateUrl: 'components/intro/intro.html'
+            })
+            .state({
                 name: 'otherwise',
                 url: '*path',
                 controller: function ($state) {
-                    $state.go('wizard');
+                    $state.go('intro');
                 }
             });
     });
