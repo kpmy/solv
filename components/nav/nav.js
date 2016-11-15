@@ -33,9 +33,13 @@ angular.module('SolvIn')
         return {
             restrict: 'E',
             templateUrl: 'components/nav/fab.html',
-            controller: function ($scope) {
+            controller: function ($scope, $state) {
                 $scope.fab = {
                     open: false
+                };
+                
+                $scope.gotoIntro = function () {
+                    $state.go('intro')
                 }
             }
         }
