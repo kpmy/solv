@@ -23,6 +23,6 @@
     "commit": "aaca13e18d24d3d2545d38024768e231f632b454"
   },
   "_source": "https://github.com/choffmeister/roboto-fontface-bower.git",
-  "_target": "^0.6.0",
+  "_target": "0.6.0",
   "_originalSource": "roboto-fontface"
 }

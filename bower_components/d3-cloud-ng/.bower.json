@@ -51,6 +51,6 @@
     "commit": "ae182bcbcc3244a4e0256231c0369e49da2ab6b7"
   },
   "_source": "https://github.com/grtjn/d3-cloud-ng.git",
-  "_target": "^0.9.6",
+  "_target": "0.9.6",
   "_originalSource": "d3-cloud-ng"
 }

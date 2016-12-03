@@ -23,8 +23,8 @@ angular.module('SolvIn', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngMessages', 
     .config(function ($mdThemingProvider) {
             $mdThemingProvider
                 .theme('default')
-                .primaryPalette('blue')
-                .accentPalette('teal')
-                .warnPalette('red')
+                .primaryPalette('red')
+                .accentPalette('green')
+                .warnPalette('deep-orange')
                 .backgroundPalette('grey');
     });
